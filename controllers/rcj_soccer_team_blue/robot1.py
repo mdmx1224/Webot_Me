@@ -72,5 +72,5 @@ class MyRobot1(RCJSoccerRobot):
                     else:
                         self.move(self.ball_pos)
                 else: 
-                    self.move(self.blueGoal)
+                    self.move(self.yellowGoal)
                     
