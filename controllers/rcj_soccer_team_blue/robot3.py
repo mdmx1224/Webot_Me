@@ -60,7 +60,7 @@ class MyRobot3(RCJSoccerRobot):
         self.ball_x = 0
         self.ball_y = 0
         self.isBall = False
-        self.yellowGoal = [0, -0.7]
+        self.yellowGoal = [0, 0.7]
         self.blueGoal = [0, 0.7]
         self.ball_pos = [0, 0]
         while self.robot.step(TIME_STEP) != -1:
@@ -72,5 +72,5 @@ class MyRobot3(RCJSoccerRobot):
                     else:
                         self.move(self.ball_pos)
                 else: 
-                    self.move(self.blueGoal)
+                    self.move(self.yellowGoal)
                     
