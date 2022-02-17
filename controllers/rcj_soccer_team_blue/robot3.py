@@ -51,7 +51,7 @@ class MyRobot3(RCJSoccerRobot):
                 self.left_motor.setVelocity(utils.velocity(-10 + angle/5))
     def move(self, dest):
         dest_angle = math.atan2(self.robot_pos[0]-dest[0],dest[1]-self.robot_pos[1])*180/math.pi
-        angle = self.heading - dest_angle
+        angle = self.heading + dest_angle
         self.moveToAngle(angle)
     def stop(self):
         self.right_motor.setVelocity(0)
@@ -60,8 +60,8 @@ class MyRobot3(RCJSoccerRobot):
         self.ball_x = 0
         self.ball_y = 0
         self.isBall = False
-        self.yellowGoal = [0, 0.7]
-        self.blueGoal = [0, 0.7]
+        self.yellowGoal = [0, -0.7]
+        self.blueGoal = [0, -0.7]
         self.ball_pos = [0, 0]
         while self.robot.step(TIME_STEP) != -1:
             if self.is_new_data():
@@ -72,5 +72,5 @@ class MyRobot3(RCJSoccerRobot):
                     else:
                         self.move(self.ball_pos)
                 else: 
-                    self.move(self.yellowGoal)
+                    self.move(self.blueGoal)
                     
