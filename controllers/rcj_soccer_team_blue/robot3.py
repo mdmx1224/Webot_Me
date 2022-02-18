@@ -61,7 +61,7 @@ class MyRobot3(RCJSoccerRobot):
         self.ball_y = 0
         self.isBall = False
         self.yellowGoal = [0, -0.7]
-        self.blueGoal = [0, -0.7]
+        self.blueGoal = [0.6, -0.7]
         self.ball_pos = [0, 0]
         while self.robot.step(TIME_STEP) != -1:
             if self.is_new_data():
