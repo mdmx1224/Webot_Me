@@ -1,9 +1,13 @@
 import math
+from socket import PACKET_BROADCAST
 import utils
 from rcj_soccer_robot import RCJSoccerRobot, TIME_STEP
-
+import struct
 
 class MyRobot1(RCJSoccerRobot):
+    def moveData(self):
+        packet = struct.pack("dd?d",1,self.robot_pos[0],self.robot_pos[1],self.isBall,self.ball_x,self.ball_y)
+        self.team_emitter.send(packet)
     def readData(self):
         self.heading = self.get_compass_heading()*180/math.pi
         self.robot_pos = self.get_gps_coordinates()
