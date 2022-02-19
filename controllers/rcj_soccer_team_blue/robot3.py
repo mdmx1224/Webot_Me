@@ -18,8 +18,8 @@ class MyRobot3(RCJSoccerRobot):
             self.ball_data = self.get_new_ball_data()
             self.ball_angle = math.atan2(self.ball_data['direction'][1], self.ball_data['direction'][0])*180/math.pi
             self.ball_distance = abs(0.0166/math.sin(self.ball_data['direction'][2]))
-            self.ball_x =-math.sin((self.ball_angle + self.heading)*math.pi/180) * self.ball_distance + self.robot_pos[0]
-            self.ball_y = math.cos((self.ball_angle + self.heading)*math.pi/180) * self.ball_distance + self.robot_pos[1]
+            self.ball_x =-math.sin((self.ball_angle + self.heading)*math.pi/180) * self.ball_distance - self.robot_pos[0]
+            self.ball_y = math.cos((self.ball_angle + self.heading)*math.pi/180) * self.ball_distance - self.robot_pos[1]
             self.ball_pos = [self.ball_x, self.ball_y]
         else:
             self.isBall = False
