@@ -1,7 +1,8 @@
 # rcj_soccer_player controller - ROBOT Y2
 
 # Feel free to import built-in libraries
-import math  # noqa: F401
+import math
+import struct  # noqa: F401
 
 # You can also import scripts that you put into the folder with controller
 import utils
@@ -16,5 +17,7 @@ class MyRobot2(RCJSoccerRobot):
                 self.right_motor.setVelocity(0)
                 self.left_motor.setVelocity(0)
                 while self.is_new_teame_data():
-                    protect = self.team_receiver.getData()
+                    packet = self.team_receiver.getData()
                     self.team_receiver.nextPacet()
+                    unpackd = struct.unpack("dd?d",packet)
+                    print(unpackd)
