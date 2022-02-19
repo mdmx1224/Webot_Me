@@ -27,48 +27,28 @@ class MyRobot3(RCJSoccerRobot):
     def moveToAngle(self, angle):
         if angle > 180: angle -= 360
         if angle <-180: angle += 360
-        if self.isBall == True:
-            if -90 < angle < 90:
-                if angle > 40:
-                    self.right_motor.setVelocity(10)
-                    self.left_motor.setVelocity(-10)
-                elif angle <-40:
-                    self.right_motor.setVelocity(-10)
-                    self.left_motor.setVelocity(10)
-                else:
-                    self.right_motor.setVelocity(utils.velocity(10 + angle/5))
-                    self.left_motor.setVelocity(utils.velocity(10 - angle/5))
+        if -90 < angle < 90:
+            if angle > 40:
+                self.right_motor.setVelocity(10)
+                self.left_motor.setVelocity(-10)
+            elif angle <-40:
+                self.right_motor.setVelocity(-10)
+                self.left_motor.setVelocity(10)
             else:
-                if angle > 40:
-                    self.right_motor.setVelocity(-10)
-                    self.left_motor.setVelocity(10)
-                elif angle <-40:
-                    self.right_motor.setVelocity(10)
-                    self.left_motor.setVelocity(-10)
-                else:
-                    self.right_motor.setVelocity(utils.velocity(-10 - angle/5))
-                    self.left_motor.setVelocity(utils.velocity(-10 + angle/5))
+                self.right_motor.setVelocity(utils.velocity(10 + angle/5))
+                self.left_motor.setVelocity(utils.velocity(10 - angle/5))
         else:
-            if -90 < angle < 90:
-                if angle > 40:
-                    self.right_motor.setVelocity(10)
-                    self.left_motor.setVelocity(-10)
-                elif angle <-40:
-                    self.right_motor.setVelocity(-10)
-                    self.left_motor.setVelocity(10)
-                else:
-                    self.right_motor.setVelocity(utils.velocity(-10 + angle/5))
-                    self.left_motor.setVelocity(utils.velocity(-10 - angle/5))
+            if angle < 0: angle = -180 - angle
+            elif angle > 0: angle =  180 - angle
+            if angle > 40:
+                self.right_motor.setVelocity(-10)
+                self.left_motor.setVelocity(10)
+            elif angle <-40:
+                self.right_motor.setVelocity(10)
+                self.left_motor.setVelocity(-10)
             else:
-                if angle > 40:
-                    self.right_motor.setVelocity(-10)
-                    self.left_motor.setVelocity(10)
-                elif angle <-40:
-                    self.right_motor.setVelocity(10)
-                    self.left_motor.setVelocity(-10)
-                else:
-                    self.right_motor.setVelocity(utils.velocity(10 - angle/5))
-                    self.left_motor.setVelocity(utils.velocity(10 + angle/5))
+                self.right_motor.setVelocity(utils.velocity(-10 - angle/5))
+                self.left_motor.setVelocity(utils.velocity(-10 + angle/5))
     def move(self, dest):
         dest_angle = math.atan2(self.robot_pos[0]-dest[0],dest[1]-self.robot_pos[1])*180/math.pi
         angle = self.heading - dest_angle
