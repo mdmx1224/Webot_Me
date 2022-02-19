@@ -11,5 +11,10 @@ from rcj_soccer_robot import RCJSoccerRobot, TIME_STEP
 class MyRobot2(RCJSoccerRobot):
 
     def run(self):
-        self.right_motor.setVelocity(0)
-        self.left_motor.setVelocity(0)
+        while self.robot.step(TIME_STEP) != -1:
+            if self.is_new_data():
+                self.right_motor.setVelocity(0)
+                self.left_motor.setVelocity(0)
+                while self.is_new_teame_data():
+                    protect = self.team_receiver.getData()
+                    self.team_receiver.nextPacet()
