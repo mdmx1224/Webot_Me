@@ -27,11 +27,11 @@ class MyRobot2(RCJSoccerRobot):
         if angle <-180: angle += 360
         if -90 < angle < 90:
             if angle > 40:
-                self.right_motor.setVelocity(-10)
-                self.left_motor.setVelocity(10)
-            elif angle <-40:
                 self.right_motor.setVelocity(10)
                 self.left_motor.setVelocity(-10)
+            elif angle <-40:
+                self.right_motor.setVelocity(-10)
+                self.left_motor.setVelocity(10)
             else:
                 self.right_motor.setVelocity(utils.velocity(10 + angle/5))
                 self.left_motor.setVelocity(utils.velocity(10 - angle/5))
