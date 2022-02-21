@@ -14,14 +14,14 @@ class MyRobot2(RCJSoccerRobot):
             self.ball_data = self.get_new_ball_data()
             self.ball_angle = math.atan2(self.ball_data['direction'][1], self.ball_data['direction'][0])*180/math.pi
             self.ball_distance = abs(0.0166/math.sin(self.ball_data['direction'][2]))
-            self.ball_x =-math.sin((self.ball_angle + self.heading)*math.pi/180) * self.ball_distance + self.robot_pos[0]
-            self.ball_y = math.cos((self.ball_angle + self.heading)*math.pi/180) * self.ball_distance + self.robot_pos[1]
+            self.ball_x =-math.sin((self.ball_angle + self.heading)*math.pi/180) * self.ball_distance - self.robot_pos[0]
+            self.ball_y = math.cos((self.ball_angle + self.heading)*math.pi/180) * self.ball_distance - self.robot_pos[1]
             self.ball_pos = [self.ball_x, self.ball_y]
         else:
             self.isBall = False
         self.robot_x = self.robot_pos[0]
         self.robot_y = self.robot_pos[1]
-        self.behind_ball = [self.ball_x, self.ball_y - 0.2]
+        self.behind_ball = [self.ball_x, self.ball_y + 0.2]
     def moveToAngle(self, angle):
         if angle > 180: angle -= 360
         if angle <-180: angle += 360
@@ -33,8 +33,8 @@ class MyRobot2(RCJSoccerRobot):
                 self.right_motor.setVelocity(-10)
                 self.left_motor.setVelocity(10)
             else:
-                self.right_motor.setVelocity(utils.velocity(10 + angle/5))
-                self.left_motor.setVelocity(utils.velocity(10 - angle/5))
+                self.right_motor.setVelocity(utils.velocity(-10 + angle/5))
+                self.left_motor.setVelocity(utils.velocity(-10 - angle/5))
         else:
             if angle < 0: angle = -180 - angle
             elif angle > 0: angle =  180 - angle
@@ -45,8 +45,8 @@ class MyRobot2(RCJSoccerRobot):
                 self.right_motor.setVelocity(10)
                 self.left_motor.setVelocity(-10)
             else:
-                self.right_motor.setVelocity(utils.velocity(-10 - angle/5))
-                self.left_motor.setVelocity(utils.velocity(-10 + angle/5))
+                self.right_motor.setVelocity(utils.velocity(10 - angle/5))
+                self.left_motor.setVelocity(utils.velocity(10 + angle/5))
     def move(self, dest):
         dest_angle = math.atan2(self.robot_pos[0]-dest[0],dest[1]-self.robot_pos[1])*180/math.pi
         angle = self.heading - dest_angle
@@ -70,7 +70,7 @@ class MyRobot2(RCJSoccerRobot):
                 self.ball_x = unpacked[4]
                 self.ball_y = unpacked[5]
                 self.ball_pos = [self.ball_x, self.ball_y]
-                self.behind_ball = [self.ball_x, self.ball_y - 0.2]
+                self.behind_ball = [self.ball_x, self.ball_y + 0.2]
                 self.isBall = True
     def run(self):
         self.ball_x = 0
@@ -92,5 +92,5 @@ class MyRobot2(RCJSoccerRobot):
                     else:
                         self.move(self.ball_pos)
                 else: 
-                    self.move(self.yellowGoal)
+                    self.move(self.blueGoal)
                 
