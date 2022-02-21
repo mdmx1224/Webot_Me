@@ -6,8 +6,16 @@ import struct
 
 class MyRobot1(RCJSoccerRobot):
     def moveData(self):
-        packet = struct.pack("dd?d",1,self.robot_pos[0],self.robot_pos[1],self.isBall,self.ball_x,self.ball_y)
+        packet = struct.pack("idd?dd",self.robot_id,self.robot_pos[0],self.robot_pos[1],self.isBall,self.ball_x,self.ball_y)
         self.team_emitter.send(packet)
+    def getTeamData(self):
+        
+        while self.is_new_teame_data():
+            packet = self.team_receiver.getData()
+            self.team_receiver.nextPacet()
+            unpacked = struct.unpack("id?d",packet)
+            self.robots_position[unpacked[0] - 1][0] = unpacked[1]
+            self.robots_position[unpacked[0] - 1][1] = unpacked[2]
     def readData(self):
         self.heading = self.get_compass_heading()*180/math.pi
         self.robot_pos = self.get_gps_coordinates()
@@ -56,12 +64,14 @@ class MyRobot1(RCJSoccerRobot):
         self.right_motor.setVelocity(0)
         self.left_motor.setVelocity(0)
     def run(self):
+        self.robot_id = int(self.name[1])
         self.ball_x = 0
         self.ball_y = 0
         self.isBall = False
         self.yellowGoal = [0, -0.7]
         self.blueGoal = [0, 0.7]
         self.ball_pos = [0, 0]
+        self.robots_position = [ [0,0] , [0,0] , [0,0]]
         while self.robot.step(TIME_STEP) != -1:
             if self.is_new_data():
                 self.readData()
