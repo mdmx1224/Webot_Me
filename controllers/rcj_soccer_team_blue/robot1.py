@@ -7,10 +7,14 @@ from rcj_soccer_robot import RCJSoccerRobot, TIME_STEP
 class MyRobot1(RCJSoccerRobot):
     def readData(self):
         self.heading = self.get_compass_heading()*180/math.pi
-        if self.name[0] == 'B':
-            if self.heading >180: heding -=360
-            if self.heading >180: heding -=360
+        # if(self.name[0] == 'B'):
+        #     self.heading = self.heading + 180
+        #     if self.heading > 180: self.heading -= 360
+        #     if self.heading <-180: self.heading += 360
         self.robot_pos = self.get_gps_coordinates()
+        if(self.name[0] == 'B'):
+            self.robot_pos[0] *= -1
+            self.robot_pos[1] *= -1
         self.sonar = self.get_sonar_values()
         if self.is_new_ball_data():
             self.isBall = True
@@ -20,19 +24,11 @@ class MyRobot1(RCJSoccerRobot):
             self.ball_x =-math.sin((self.ball_angle + self.heading)*math.pi/180) * self.ball_distance + self.robot_pos[0]
             self.ball_y = math.cos((self.ball_angle + self.heading)*math.pi/180) * self.ball_distance + self.robot_pos[1]
             self.ball_pos = [self.ball_x, self.ball_y]
-            if self.na,e[0] == 'B':
-            self.robot_x *= -1
-            self.robot_y *= -1
         else:
             self.isBall = False
         self.robot_x = self.robot_pos[0]
         self.robot_y = self.robot_pos[1]
         self.behind_ball = [self.ball_x, self.ball_y - 0.2]
-        if self.na,e[0] == 'B':
-            self.robot_x *= -1
-            self.robot_y *= -1
-            self.robot_pos[0] *= -1
-            self.robot_pos[0] *= -1
 
     def moveToAngle(self, angle):
         if angle > 180: angle -= 360
@@ -88,8 +84,8 @@ class MyRobot1(RCJSoccerRobot):
         self.ball_x = 0
         self.ball_y = 0
         self.isBall = False
-        self.O_Goal = [0, -0.7]
-        self.T_goal = [0, 0.7]
+        self.T_Goal = [0, -0.7]
+        self.O_Goal = [0, 0.7]
         self.ball_pos = [0, 0]
         self.robot_positions = [ [0, 0] , [0, 0] , [0, 0] ]
         self.robot_id = int(self.name[1])
@@ -104,5 +100,5 @@ class MyRobot1(RCJSoccerRobot):
                     else:
                         self.move(self.ball_pos)
                 else: 
-                    self.move(self.T_goal)
+                    self.move(self.T_Goal)
                 
