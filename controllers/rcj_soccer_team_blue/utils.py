@@ -1,5 +1,4 @@
 import math
-
 dataFormat = "idd?dd"
 
 def get_direction(ball_vector: list) -> int:
