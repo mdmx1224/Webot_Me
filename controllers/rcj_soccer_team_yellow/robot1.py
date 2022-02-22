@@ -103,7 +103,7 @@ class MyRobot1(RCJSoccerRobot):
         self.last_ball_pos = self.ball_pos
         while self.robot.step(TIME_STEP) != -1:
             if self.is_new_data():
-                self.waitingForKick = (self.get_new_data()['waiting_for_kickoff'])+1
+                self.waitingForKick = self.get_new_data()['waiting_for_kickoff']
                 self.readData()
                 self.sendTeamData()
                 self.getTeamData()
