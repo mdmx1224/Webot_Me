@@ -129,4 +129,5 @@ class MyRobot1(RCJSoccerRobot):
                             self.move(self.ball_pos)
                     else: 
                         self.move(self.T_Goal)
+                    print(self.ball_pos)
                 self.last_ball_pos = self.ball_pos
