@@ -16,7 +16,6 @@ class MyRobot1(RCJSoccerRobot):
         if(self.name[0] == 'B'):
             self.robot_pos[0] *= -1
             self.robot_pos[1] *= -1
-        print(self.robot_pos)
         self.sonar = self.get_sonar_values()
         if self.is_new_ball_data():
             self.isBall = True
@@ -85,7 +84,7 @@ class MyRobot1(RCJSoccerRobot):
         distances[0] = utils.getDistance([self.robot_positions[0][0], self.robot_positions[0][1]], self.ball_pos)
         distances[1] = utils.getDistance([self.robot_positions[1][0], self.robot_positions[1][1]], self.ball_pos)
         distances[2] = utils.getDistance([self.robot_positions[2][0], self.robot_positions[2][1]], self.ball_pos)
-        print(distances[0])
+        
         if distances[self.robot_id - 1] == max(distances):
             self.gaolKeeper = True
         else:
@@ -104,8 +103,10 @@ class MyRobot1(RCJSoccerRobot):
         self.gaol = False
         self.goalKeeper_x = 0
         self.last_ball_pos = self.ball_pos
-        distances_1 = utils.getDistance([self.robot_positions[0][0], self.robot_positions[0][1]], self.ball_pos)
+
         while self.robot.step(TIME_STEP) != -1:
+            distances_1 = utils.getDistance([self.robot_positions[1][0], self.robot_positions[1][1]], self.ball_pos)
+            print(distances_1)
             if self.is_new_data():
                 self.waitingForKick = self.get_new_data()['waiting_for_kickoff']
                 self.readData()
@@ -132,7 +133,7 @@ class MyRobot1(RCJSoccerRobot):
                             self.move(self.behind_ball)
                         else:
                             self.move(self.ball_pos)
-                    elif distances_1>0.7 and self.robot_pos[1] > 0:
+                    elif distances_1< 0.1 and self.robot_pos[1] > 0:
                         if self.ball_angle >-10 and self.ball_angle<10:
                             self.move(self.O_Goal)
                     else: 
