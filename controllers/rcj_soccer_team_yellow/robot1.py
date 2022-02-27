@@ -86,7 +86,6 @@ class MyRobot1(RCJSoccerRobot):
             self.gaolKeeper = True
         else:
             self.gaolKeeper = False
-
     def run(self):
         self.ball_x = 0
         self.ball_y = 0
