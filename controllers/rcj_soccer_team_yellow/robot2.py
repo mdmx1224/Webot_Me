@@ -128,7 +128,6 @@ class MyRobot2(RCJSoccerRobot):
                             print(self.robot_pos)
                             if self.robot_pos[1] < 0 :
                                 if self.robot_pos[0] < -0.4 and self.robot_pos > 0.4:
-                                    
                                     self.ball_pos[0] = self.ball_pos[0] + 0.6
                                     self.ball_pos[1] = self.ball_pos[1] + 0.6
                     else: 
