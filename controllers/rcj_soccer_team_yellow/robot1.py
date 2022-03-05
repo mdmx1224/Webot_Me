@@ -122,10 +122,8 @@ class MyRobot1(RCJSoccerRobot):
                     if self.isBall:
                         if utils.getDistance(self.robot_pos, self.behind_ball) > 0.2:
                             self.move(self.behind_ball)
-                            self.move(self.O_Goal)
                         else:
                             self.move(self.ball_pos)
-                            self.move(self.O_Goal)
                     else: 
                         self.move(self.T_Goal)
                 self.last_ball_pos = self.ball_pos
