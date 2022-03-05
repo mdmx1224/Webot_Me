@@ -5,8 +5,8 @@ import geometry
 from rcj_soccer_robot import RCJSoccerRobot, TIME_STEP
 class MyRobot3(RCJSoccerRobot):
     def run(self):
-        self.right_motor.setVelocity(0)
-        self.left_motor.setVelocity(0)
+        self.right_motor.setVelocity(-10)
+        self.left_motor.setVelocity(-10)
     # def readData(self):
     #     self.heading = self.get_compass_heading()*180/math.pi
     #     # if(self.name[0] == 'B'):
