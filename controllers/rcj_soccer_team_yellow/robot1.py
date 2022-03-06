@@ -124,6 +124,6 @@ class MyRobot1(RCJSoccerRobot):
                             self.move(self.behind_ball)
                         else:
                             self.move(self.ball_pos)
-                    else: 
+                    else:
                         self.move(self.T_Goal)
                 self.last_ball_pos = self.ball_pos
